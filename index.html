@@ -440,6 +440,7 @@
                     console.error(err);
                     showToast("Failed to discharge patient.", "error");
                 });
+
         }
     });
 };
@@ -923,7 +924,9 @@ window.showDischargeInstructions = async function(index) {
     if (!patient) return;
 
     try {
-        const sheet = await fetchSheetCSV();
+        const activePatient = patients.find(p => p.hospNo === patient.hospNo);
+
+    const sheet = await fetchSheetCSV();
 
         // Find matching row by Hospital Number (Column X)
         const row = sheet.find(r => r[23]?.trim() === patient.hospNo);
